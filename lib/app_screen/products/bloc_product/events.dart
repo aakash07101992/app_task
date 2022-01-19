@@ -1,0 +1,4 @@
+enum ProductEvent{
+  fetchProducts,
+  fetchMoreProducts,
+}
