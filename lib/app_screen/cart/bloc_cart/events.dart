@@ -12,6 +12,8 @@ class CartEvent extends Equatable{
 
 class LoadProducts extends CartEvent{}
 
+class GetCartData extends CartEvent{}
+
 class AddProducts extends CartEvent{
   DataProductAdd dataProductAdd;
   AddProducts({required this.dataProductAdd});

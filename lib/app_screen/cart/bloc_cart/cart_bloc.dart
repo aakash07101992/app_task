@@ -17,6 +17,9 @@ class CartBloc extends Bloc<CartEvent,CartStates>{
 
   List<DataProductAdd>? dataProductsList;
 
+  String totalItems = "0";
+  String grandTotal = "0";
+
   CartBloc() : super(CartInit());
 
 
@@ -26,7 +29,16 @@ class CartBloc extends Bloc<CartEvent,CartStates>{
     if(event is LoadProducts){
       emit(CartLoading());
       dataProductsList = await LocalServices.getList();
-      emit(CartLoaded(list: dataProductsList!));
+      var itemCount = 0;
+      var totalGrand = 0.0;
+      if(dataProductsList!.length >0){
+        itemCount = dataProductsList!.length;
+        for(DataProductAdd data in dataProductsList!){
+          totalGrand += double.parse(data.price.toString());
+        }
+      }
+      emit(CartLoaded(list: dataProductsList!,totalItem: itemCount.toString(),grandTotal: totalGrand.toString()));
+
     }else if(event is AddProducts){
       var data = event.dataProductAdd.toJson();
       var jsonData = json.encode(data);
@@ -37,8 +49,17 @@ class CartBloc extends Bloc<CartEvent,CartStates>{
       emit(CartLoading());
       dataProductsList = [];
       dataProductsList = await LocalServices.getList();
-      emit(CartLoaded(list: dataProductsList!));
+      var itemCount = 0;
+      var totalGrand = 0.0;
+      if(dataProductsList!.length >0){
+        itemCount = dataProductsList!.length;
+        for(DataProductAdd data in dataProductsList!){
+          totalGrand += double.parse(data.price.toString());
+        }
+      }
+      emit(CartLoaded(list: dataProductsList!,totalItem: itemCount.toString(),grandTotal: totalGrand.toString()));
     }
+
   }
 
 }

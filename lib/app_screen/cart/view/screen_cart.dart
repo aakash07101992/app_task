@@ -32,6 +32,7 @@ class _ScreenCartState extends State<ScreenCart> {
 
   Future _loadCart() async{
     context.read<CartBloc>().add(LoadProducts());
+
   }
 
 
@@ -41,6 +42,29 @@ class _ScreenCartState extends State<ScreenCart> {
       appBar: AppBar(
         centerTitle: true,
         title: Text("My Cart"),
+      ),
+      bottomNavigationBar: BlocBuilder<CartBloc,CartStates>(
+        builder: (BuildContext context, CartStates state){
+          if(state is CartLoaded){
+            return Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: 55,
+              color: Colors.blue.withOpacity(0.7),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                  Text("Total Item : ${state.totalItem}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+
+                  Text("Grand Total : ${state.grandTotal}", style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600))
+
+                ],
+              ),
+            );
+          }
+          return CircularProgressIndicator();
+        },
+
       ),
       body: Container(
           width: double.infinity,

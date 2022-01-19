@@ -17,8 +17,11 @@ class CartItemRemoved extends CartStates{}
 
 class CartLoaded extends CartStates{
   List<DataProductAdd> list;
-  CartLoaded({required this.list});
+  String totalItem;
+  String grandTotal;
+  CartLoaded({required this.list, required this.totalItem, required this.grandTotal});
 }
+
 
 class CartError extends CartStates{
 
