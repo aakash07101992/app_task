@@ -23,12 +23,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 class ScreenProducts extends StatefulWidget {
   const ScreenProducts({Key? key}) : super(key: key);
 
-
-
-
-
-
-
   @override
   _ScreenProductsState createState() => _ScreenProductsState();
 }
